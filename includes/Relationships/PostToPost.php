@@ -228,8 +228,8 @@ class PostToPost extends Relationship {
 			$order++;
 
 			$data[] = array(
-				'id1' => $id,
-				'id2' => $object_id,
+				'id1' => $object_id,
+				'id2' => $id,
 				'name' => $this->name,
 				'order' => $order
 			);
