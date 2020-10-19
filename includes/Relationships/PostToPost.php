@@ -222,8 +222,8 @@ class PostToPost extends Relationship {
 
 		$order = 0;
 
-		$data = array();
-
+        $data = array();
+        $data_rev = array();
 		foreach( $ordered_ids as $id ) {
 			$order++;
 
@@ -233,7 +233,14 @@ class PostToPost extends Relationship {
 				'name' => $this->name,
 				'order' => $order
 			);
-		}
+
+			$data_rev[] = array(
+				'id1' => $id,
+				'id2' => $object_id,
+				'name' => $this->name,
+				'order' => $order
+			);
+        }
 		
 		$fields = array(
 			'id1' => '%d',
@@ -245,6 +252,8 @@ class PostToPost extends Relationship {
 		/** @var \TenUp\ContentConnect\Tables\PostToPost $table */
 		$table = Plugin::instance()->get_table( 'p2p' );
 		$table->replace_bulk( $fields, $data );
-	}
+		$table->replace_bulk( $fields, $data_rev );
+
+    }
 
 }
